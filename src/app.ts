@@ -4,7 +4,6 @@ import serveFavicon from 'serve-favicon';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import nodeSassMiddleware from 'node-sass-middleware';
 
 const index = require('./routes/index');
 const users = require('./routes/users');
@@ -21,12 +20,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(nodeSassMiddleware({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  indentedSyntax: true, // true = .sass and false = .scss
-  sourceMap: true,
-}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
