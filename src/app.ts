@@ -4,7 +4,7 @@ import serveFavicon from 'serve-favicon';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import index from './routes/index';
+import index from './providers/index';
 
 const app = express();
 
@@ -32,14 +32,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   next(err);
 });
 
-// error handler
+// Error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (!err) {
     res.status(500);
     res.render('error');
   }
 
-  // set locals, only providing error in development
+  // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.render('error');
